@@ -10,9 +10,9 @@ import requests
 # Load .env
 # ==========================
 load_dotenv()
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+SUPABASE_URL = st.secrets["SUPABASE_URL"]
+SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
+OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
@@ -116,3 +116,4 @@ if submitted:
             labels={"final_match_rate": "Final Match Rate"}
         )
         st.plotly_chart(fig_dist, use_container_width=True)
+
