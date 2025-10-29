@@ -27,7 +27,7 @@ def generate_with_llm(prompt: str):
         }
 
         data = {
-            "model": "openai/gpt-oss-20b:free",  # ganti model yang pasti tersedia gratis
+            "model": "minimax/minimax-m2:free",  # ganti model yang pasti tersedia gratis
             "messages": [{"role": "user", "content": prompt}],
         }
 
@@ -120,6 +120,7 @@ if submitted:
             labels={"final_match_rate": "Final Match Rate"}
         )
         st.plotly_chart(fig_dist, use_container_width=True)
+
 
 
 
