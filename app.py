@@ -5,7 +5,6 @@ from supabase import create_client, Client
 import os
 from dotenv import load_dotenv
 import requests
-st.write("🔍 Cek API Key:", OPENROUTER_API_KEY[:10])
 # ==========================
 # Load .env
 # ==========================
@@ -23,6 +22,8 @@ def generate_with_llm(prompt: str):
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
             "Content-Type": "application/json",
+            "HTTP-Referer": "https://share.streamlit.io",  # referer domain app kamu
+            "X-Title": "Talent Match Dashboard",
         }
         data = {
             "model": "minimax/minimax-m2:free",
@@ -115,6 +116,7 @@ if submitted:
             labels={"final_match_rate": "Final Match Rate"}
         )
         st.plotly_chart(fig_dist, use_container_width=True)
+
 
 
 
