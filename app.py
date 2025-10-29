@@ -22,22 +22,26 @@ def generate_with_llm(prompt: str):
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://share.streamlit.io",  # referer domain app kamu
-            "X-Title": "Talent Match Dashboard",
+            "HTTP-Referer": "https://share.streamlit.io",  # penting agar request diterima
+            "X-Title": "Talent Match Dashboard"  # judul app kamu
         }
+
         data = {
-            "model": "minimax/minimax-m2:free",
+            "model": "meta-llama/llama-3.1-8b-instruct:free",  # ganti model yang pasti tersedia gratis
             "messages": [{"role": "user", "content": prompt}],
         }
+
         response = requests.post(
             "https://openrouter.ai/api/v1/chat/completions",
             headers=headers,
             json=data
         )
+
         if response.status_code == 200:
             return response.json()['choices'][0]['message']['content']
         else:
-            return f"Gagal generate dari LLM. Status code: {response.status_code}"
+            return f"Gagal generate dari LLM. Status code: {response.status_code} | Detail: {response.text}"
+
     except Exception as e:
         return f"Error: {e}"
 
@@ -116,6 +120,7 @@ if submitted:
             labels={"final_match_rate": "Final Match Rate"}
         )
         st.plotly_chart(fig_dist, use_container_width=True)
+
 
 
 
