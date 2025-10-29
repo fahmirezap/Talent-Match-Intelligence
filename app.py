@@ -5,7 +5,7 @@ from supabase import create_client, Client
 import os
 from dotenv import load_dotenv
 import requests
-
+st.write("🔍 Cek API Key:", OPENROUTER_API_KEY[:10])
 # ==========================
 # Load .env
 # ==========================
@@ -115,5 +115,6 @@ if submitted:
             labels={"final_match_rate": "Final Match Rate"}
         )
         st.plotly_chart(fig_dist, use_container_width=True)
+
 
 
